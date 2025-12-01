@@ -49,5 +49,14 @@ public class ProductService {
 		entity.setEstoque(obj.getEstoque());
 		entity.setPreco(obj.getPreco());
 	}
+	
+	public void delete(Long id) {
+		try {
+			if(!repository.existsById(id)) throw new ResourceNotFound(id);
+				repository.deleteById(id);
+		} catch(ResourceNotFound e) {
+			throw new ResourceNotFound(id);
+		}
+	}
 
 }
